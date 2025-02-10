@@ -5,10 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Boa Carne - Restaurante</title>
     <link rel="stylesheet" href="styles.css">
+    <script>
+        function confirmarFacturacion() {
+            alert("Tu factura llegará entre 24 y 72 horas a tu correo electrónico.");
+        }
+    </script>
 </head>
 <body>
     <header>
-        <h1>Boa Carne</h1>
+        <div class="header-container">
+            <img src="IMG_0356.PNG" alt="Logo Boa Carne" class="logo">
+        </div>
         <nav>
             <ul>
                 <li><a href="#menu">Menú</a></li>
@@ -20,8 +27,8 @@
     
     <section id="menu">
         <h2>Menú</h2>
-        <p>Descubre nuestros deliciosos platillos.</p>
-        <button onclick="alert('Menú próximamente disponible')">Ver Menú</button>
+        <p>Descubre nuestros cortes.</p>
+        <button class="btn">Ver Menú</button>
     </section>
     
     <section id="reservas">
@@ -40,17 +47,14 @@
             <label for="hora">Hora:</label>
             <input type="time" id="hora" name="hora" required>
             
-            <input type="hidden" name="_subject" value="Nueva Reserva">
-            <input type="hidden" name="_autoresponse" value="Gracias por tu reserva en Boa Carne. Te confirmaremos pronto.">
-            
-            <button type="submit">Reservar ahora</button>
+            <button class="btn" type="submit">Reservar ahora</button>
         </form>
     </section>
     
     <section id="facturacion">
         <h2>Facturación</h2>
         <p>Ingresa los siguientes datos para obtener tu factura.</p>
-        <form action="https://formsubmit.co/boaboacarne@gmail.com" method="POST">
+        <form action="https://formsubmit.co/boaboacarne@gmail.com" method="POST" onsubmit="confirmarFacturacion()">
             <label for="folio">Folio del Ticket:</label>
             <input type="text" id="folio" name="folio" required>
             
@@ -64,24 +68,29 @@
             <input type="text" id="razon" name="razon" required>
             
             <label for="regimen">Régimen Fiscal:</label>
-            <input type="text" id="regimen" name="regimen" required>
+            <select id="regimen" name="regimen" required>
+                <option value="601">General de Ley Personas Morales</option>
+                <option value="603">Personas Morales con Fines no Lucrativos</option>
+                <option value="605">Sueldos y Salarios e Ingresos Asimilados a Salarios</option>
+                <option value="606">Arrendamiento</option>
+                <option value="612">Personas Físicas con Actividades Empresariales y Profesionales</option>
+                <option value="626">Régimen Simplificado de Confianza</option>
+            </select>
             
-            <label for="codigo">Código Postal:</label>
-            <input type="text" id="codigo" name="codigo" required>
+            <label for="codigo_postal">Código Postal:</label>
+            <input type="text" id="codigo_postal" name="codigo_postal" required>
             
-            <label for="uso">Uso de la Factura:</label>
-            <input type="text" id="uso" name="uso" required>
-            
-            <label for="pago">Método de Pago:</label>
-            <input type="text" id="pago" name="pago" required>
+            <label for="metodo">Método de Pago:</label>
+            <select id="metodo" name="metodo" required>
+                <option value="Efectivo">Efectivo</option>
+                <option value="Tarjeta de Crédito">Tarjeta de Crédito</option>
+                <option value="Tarjeta de Débito">Tarjeta de Débito</option>
+            </select>
             
             <label for="correo">Correo Electrónico:</label>
             <input type="email" id="correo" name="correo" required>
             
-            <input type="hidden" name="_subject" value="Solicitud de Factura">
-            <input type="hidden" name="_autoresponse" value="Gracias por solicitar tu factura. Te la enviaremos a la brevedad.">
-            
-            <button type="submit">Solicitar Factura</button>
+            <button class="btn" type="submit">Solicitar Factura</button>
         </form>
     </section>
     
