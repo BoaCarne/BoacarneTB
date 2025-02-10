@@ -34,7 +34,8 @@
     <section id="reservas">
         <h2>Reservar</h2>
         <p>Haz tu reserva en línea de manera rápida y sencilla.</p>
-        <form action="https://formsubmit.co/boaboacarne@gmail.com" method="POST">
+        <form action="https://formsubmit.co/boaboacarne@gmail.com" method="POST" onsubmit="confirmarReservas()">
+    <input type="hidden" name="_next" value="https://boacarne.github.io/BoacarneTB/#facturacion">
             <label for="nombre">Nombre:</label>
             <input type="text" id="nombre" name="nombre" required>
             
@@ -55,6 +56,7 @@
         <h2>Facturación</h2>
         <p>Ingresa los siguientes datos para obtener tu factura.</p>
         <form action="https://formsubmit.co/boaboacarne@gmail.com" method="POST" onsubmit="confirmarFacturacion()">
+             <input type="hidden" name="_next" value="https://boacarne.github.io/BoacarneTB/#facturacion">
             <label for="folio">Folio del Ticket:</label>
             <input type="text" id="folio" name="folio" required>
             
