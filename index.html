@@ -24,16 +24,13 @@
             const personas = document.getElementById("personas").value;
             const fecha = document.getElementById("fecha").value;
             const hora = document.getElementById("hora").value;
-            const telefono = document.getElementById("telefono").value;
-
 
             const mensaje = 
-                `🥩 *Nueva Reserva en Boa Carne*:%0A` +
-                `Nombre: ${nombre}%0A` +
-                `Teléfono: ${telefono} %0A` +
-                `Número de personas: ${personas}%0A` +
-                `Fecha: ${fecha}%0A` +
-                `Hora: ${hora}`;
+                🥩 *Nueva Reserva en Boa Carne*:%0A +
+                Nombre: ${nombre}%0A +
+                Número de personas: ${personas}%0A +
+                Fecha: ${fecha}%0A +
+                Hora: ${hora};
 
             sendWhatsAppMessage(mensaje);
 
