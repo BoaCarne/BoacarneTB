@@ -24,17 +24,20 @@
             const personas = document.getElementById("personas").value;
             const fecha = document.getElementById("fecha").value;
             const hora = document.getElementById("hora").value;
+            const telefono = document.getElementById("telefono").value;
+
 
             const mensaje = 
                 `🥩 *Nueva Reserva en Boa Carne*:%0A` +
                 `Nombre: ${nombre}%0A` +
+                `Teléfono: ${telefono} %0A` +
                 `Número de personas: ${personas}%0A` +
                 `Fecha: ${fecha}%0A` +
                 `Hora: ${hora}`;
 
             sendWhatsAppMessage(mensaje);
 
-            alert("¡Tu reserva ha sido registrada! Te llegará confirmación por WhatsApp.");
+            alert("¡Tu reserva ha sido registrada!");
             event.target.reset();
         }
 
@@ -65,7 +68,7 @@
 
             sendWhatsAppMessage(mensaje);
 
-            alert("Tu factura llegará entre 24 y 72 horas. También recibirás confirmación por WhatsApp.");
+            alert("Tu factura llegará entre 24 y 72 horas, al correo que proporcionó.");
             event.target.reset();
         }
     </script>
@@ -160,7 +163,7 @@
                 <option value="Tarjeta de Débito">Tarjeta de Débito</option>
             </select>
 
-            <label for="correo">Correo Electrónico:</label>
+            <label for="correo">Correo Electrónico:(@gmail/@outlook/@hotmail)</label>
             <input type="email" id="correo" name="correo" required />
 
             <button class="btn" type="submit">Solicitar Factura</button>
