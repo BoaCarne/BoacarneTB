@@ -1,20 +1,79 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Boa Carne - Restaurante</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css" />
     <script>
-        function confirmarFacturacion() {
-            alert("Tu factura llegará entre 24 y 72 horas a tu correo electrónico.");
+        // Reemplaza con tu número y API key de CallMeBot
+        const phone = "5212741104674";
+        const apiKey = "6106851";
+
+        function sendWhatsAppMessage(text) {
+            const url = `https://api.callmebot.com/whatsapp.php?phone=${phone}&apikey=${apiKey}&text=${encodeURIComponent(text)}`;
+            fetch(url)
+                .then(() => console.log("Mensaje enviado a WhatsApp"))
+                .catch(() => console.error("Error enviando mensaje a WhatsApp"));
+        }
+
+        function confirmarReservas(event) {
+            event.preventDefault();
+
+            const nombre = document.getElementById("nombre").value;
+            const personas = document.getElementById("personas").value;
+            const fecha = document.getElementById("fecha").value;
+            const hora = document.getElementById("hora").value;
+
+            const mensaje = 
+                `🥩 *Nueva Reserva en Boa Carne*:%0A` +
+                `Nombre: ${nombre}%0A` +
+                `Número de personas: ${personas}%0A` +
+                `Fecha: ${fecha}%0A` +
+                `Hora: ${hora}`;
+
+            sendWhatsAppMessage(mensaje);
+
+            alert("¡Tu reserva ha sido registrada! Te llegará confirmación por WhatsApp.");
+            event.target.reset();
+        }
+
+        function confirmarFacturacion(event) {
+            event.preventDefault();
+
+            const folio = document.getElementById("folio").value;
+            const monto = document.getElementById("monto").value;
+            const rfc = document.getElementById("rfc").value;
+            const razon = document.getElementById("razon").value;
+            const regimenSelect = document.getElementById("regimen");
+            const regimen = regimenSelect.options[regimenSelect.selectedIndex].text;
+            const codigo_postal = document.getElementById("codigo_postal").value;
+            const metodoSelect = document.getElementById("metodo");
+            const metodo = metodoSelect.options[metodoSelect.selectedIndex].text;
+            const correo = document.getElementById("correo").value;
+
+            const mensaje = 
+                `📄 *Nueva Solicitud de Factura en Boa Carne*:%0A` +
+                `Folio del Ticket: ${folio}%0A` +
+                `Monto Total (sin propina): ${monto}%0A` +
+                `RFC: ${rfc}%0A` +
+                `Razón Social: ${razon}%0A` +
+                `Régimen Fiscal: ${regimen}%0A` +
+                `Código Postal: ${codigo_postal}%0A` +
+                `Método de Pago: ${metodo}%0A` +
+                `Correo Electrónico: ${correo}`;
+
+            sendWhatsAppMessage(mensaje);
+
+            alert("Tu factura llegará entre 24 y 72 horas. También recibirás confirmación por WhatsApp.");
+            event.target.reset();
         }
     </script>
 </head>
 <body>
     <header>
         <div class="header-container">
-            <img src="IMG_0356.PNG" alt="Logo Boa Carne" class="logo">
+            <img src="IMG_0356.PNG" alt="Logo Boa Carne" class="logo" />
         </div>
         <nav>
             <ul>
@@ -24,92 +83,90 @@
             </ul>
         </nav>
     </header>
-    
+
     <section id="menu">
         <h2>Menú</h2>
         <p>Descubre nuestros cortes.</p>
         <button class="btn">Ver Menú</button>
     </section>
-    
+
     <section id="reservas">
         <h2>Reservar</h2>
         <p>Haz tu reserva en línea de manera rápida y sencilla.</p>
-        <form action="https://formsubmit.co/boaboacarne@gmail.com" method="POST" onsubmit="confirmarReservas()">
-    <input type="hidden" name="_next" value="https://boacarne.github.io/BoacarneTB/#facturacion">
+        <form onsubmit="confirmarReservas(event)">
             <label for="nombre">Nombre:</label>
-            <input type="text" id="nombre" name="nombre" required>
-            
+            <input type="text" id="nombre" name="nombre" required />
+
             <label for="personas">Número de personas:</label>
-            <input type="number" id="personas" name="personas" min="1" required>
-            
+            <input type="number" id="personas" name="personas" min="1" required />
+
             <label for="fecha">Fecha:</label>
-            <input type="date" id="fecha" name="fecha" required>
-            
+            <input type="date" id="fecha" name="fecha" required />
+
             <label for="hora">Hora:</label>
-            <input type="time" id="hora" name="hora" required>
-            
+            <input type="time" id="hora" name="hora" required />
+
             <button class="btn" type="submit">Reservar ahora</button>
         </form>
     </section>
-    
+
     <section id="facturacion">
         <h2>Facturación</h2>
         <p>Ingresa los siguientes datos para obtener tu factura.</p>
-        <form action="https://formsubmit.co/boaboacarne@gmail.com" method="POST" onsubmit="confirmarFacturacion()">
-             <input type="hidden" name="_next" value="https://boacarne.github.io/BoacarneTB/#facturacion">
+        <form onsubmit="confirmarFacturacion(event)">
             <label for="folio">Folio del Ticket:</label>
-            <input type="text" id="folio" name="folio" required>
-            
+            <input type="text" id="folio" name="folio" required />
+
             <label for="monto">Monto Total (sin propina):</label>
-            <input type="number" id="monto" name="monto" step="0.01" required>
-            
+            <input type="number" id="monto" name="monto" step="0.01" required />
+
             <label for="rfc">RFC:</label>
-            <input type="text" id="rfc" name="rfc" required>
-            
+            <input type="text" id="rfc" name="rfc" required />
+
             <label for="razon">Razón Social:</label>
-            <input type="text" id="razon" name="razon" required>
-            
+            <input type="text" id="razon" name="razon" required />
+
             <label for="regimen">Régimen Fiscal:</label>
             <select id="regimen" name="regimen" required>
                 <option value="601">General de Ley Personas Morales</option>
-    <option value="603">Personas Morales con Fines no Lucrativos</option>
-    <option value="605">Sueldos y Salarios e Ingresos Asimilados a Salarios</option>
-    <option value="606">Arrendamiento</option>
-    <option value="607">Régimen de Enajenación o Adquisición de Bienes</option>
-    <option value="608">Demás ingresos</option>
-    <option value="609">Consolidación</option>
-    <option value="610">Residentes en el Extranjero sin Establecimiento Permanente en México</option>
-    <option value="611">Ingresos por Dividendos (socios y accionistas)</option>
-    <option value="612">Personas Físicas con Actividades Empresariales y Profesionales</option>
-    <option value="614">Ingresos por Intereses</option>
-    <option value="615">Régimen de los ingresos por obtención de premios</option>
-    <option value="616">Sin obligaciones fiscales</option>
-    <option value="620">Sociedades Cooperativas de Producción que optan por diferir sus ingresos</option>
-    <option value="621">Incorporación Fiscal</option>
-    <option value="622">Actividades Agrícolas, Ganaderas, Silvícolas y Pesqueras</option>
-    <option value="623">Opcional para Grupos de Sociedades</option>
-    <option value="624">Coordinados</option>
-    <option value="625">Régimen de las Actividades Empresariales con ingresos a través de Plataformas Tecnológicas</option>
-    <option value="626">Régimen Simplificado de Confianza</option>
+                <option value="603">Personas Morales con Fines no Lucrativos</option>
+                <option value="605">Sueldos y Salarios e Ingresos Asimilados a Salarios</option>
+                <option value="606">Arrendamiento</option>
+                <option value="607">Régimen de Enajenación o Adquisición de Bienes</option>
+                <option value="608">Demás ingresos</option>
+                <option value="609">Consolidación</option>
+                <option value="610">Residentes en el Extranjero sin Establecimiento Permanente en México</option>
+                <option value="611">Ingresos por Dividendos (socios y accionistas)</option>
+                <option value="612">Personas Físicas con Actividades Empresariales y Profesionales</option>
+                <option value="614">Ingresos por Intereses</option>
+                <option value="615">Régimen de los ingresos por obtención de premios</option>
+                <option value="616">Sin obligaciones fiscales</option>
+                <option value="620">Sociedades Cooperativas de Producción que optan por diferir sus ingresos</option>
+                <option value="621">Incorporación Fiscal</option>
+                <option value="622">Actividades Agrícolas, Ganaderas, Silvícolas y Pesqueras</option>
+                <option value="623">Opcional para Grupos de Sociedades</option>
+                <option value="624">Coordinados</option>
+                <option value="625">Régimen de las Actividades Empresariales con ingresos a través de Plataformas Tecnológicas</option>
+                <option value="626">Régimen Simplificado de Confianza</option>
             </select>
-            
+
             <label for="codigo_postal">Código Postal:</label>
-            <input type="text" id="codigo_postal" name="codigo_postal" required>
-            
+            <input type="text" id="codigo_postal" name="codigo_postal" required />
+
             <label for="metodo">Método de Pago:</label>
             <select id="metodo" name="metodo" required>
                 <option value="Efectivo">Efectivo</option>
                 <option value="Tarjeta de Crédito">Tarjeta de Crédito</option>
                 <option value="Tarjeta de Débito">Tarjeta de Débito</option>
             </select>
-            
+
             <label for="correo">Correo Electrónico:</label>
-            <input type="email" id="correo" name="correo" required>
-            
+            <input type="email" id="correo" name="correo" required />
+
             <button class="btn" type="submit">Solicitar Factura</button>
         </form>
     </section>
-    
+
     <footer>
         <p>&copy; 2025 Boa Carne - Todos los derechos reservados.</p>
     </footer>
